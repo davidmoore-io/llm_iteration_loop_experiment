@@ -168,6 +168,10 @@ Throughout the process, several best practices emerged:
 - The script will default to the public OpenAI API if no config file is specified.
 - The script saves each run's output in a JSON file for easy inspection.
 
+## System Flow Diagram
+
+![Mermaid Diagram](./images/process-flow.png)
+
 ## Troubleshooting
 
 If you encounter any issues, ensure that:
@@ -183,6 +187,3 @@ For further assistance, please refer to the [OpenAI API documentation](https://g
 This project demonstrates the potential of using GPT-4o to create functional, complete projects quickly. The iterative approach, combined with prompt experimentation and careful code review, ensures high-quality and efficient outputs. As AI continues to evolve, such methodologies will become increasingly valuable in various domains, enabling rapid development and innovation.
 
 For more detailed insights and the complete project, visit the [GitHub repository](https://github.com/your-repo-link).
-```
-
-This `README.md` now includes the developer notes, setup instructions for Mac, Linux, and Windows, and all other necessary information to run the project. Let me know if you need any further adjustments!
