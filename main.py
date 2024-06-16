@@ -1,4 +1,5 @@
 import openai
+from openai import OpenAI
 import argparse
 import yaml
 import os
@@ -11,6 +12,13 @@ def load_system_prompt(file_path):
             return file.read()
     except Exception as e:
         raise FileNotFoundError(f"Could not read the system prompt file: {e}")
+
+def load_user_input(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return file.read()
+    except Exception as e:
+        raise FileNotFoundError(f"Could not read the user input prompt file: {e}")
 
 def load_config(config_path):
     try:
@@ -36,7 +44,8 @@ def call_openai_api(system_prompt, user_input, api_key, api_base=None):
         if api_base:
             openai.api_base = api_base
 
-        response = openai.ChatCompletion.create(
+        client = OpenAI()
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -49,8 +58,8 @@ def call_openai_api(system_prompt, user_input, api_key, api_base=None):
 
 def main():
     parser = argparse.ArgumentParser(description="OpenAI API CLI")
-    parser.add_argument('user_input', type=str, help="User input text")
     parser.add_argument('--system_prompt', type=str, default='./input/default_system_prompt.txt', help="Path to the system prompt file")
+    parser.add_argument('--user_input_prompt', type=str, default='./input/user_input_prompt.txt', help="Path to the user input prompt file")
     parser.add_argument('--config', type=str, help="Path to the configuration YAML file")
     parser.add_argument('--runs', type=int, default=1, help="Number of times to run the model")
     args = parser.parse_args()
@@ -68,7 +77,7 @@ def main():
             api_base = None
             system_prompt = load_system_prompt(args.system_prompt)
 
-        user_input = args.user_input
+        user_input = load_user_input(args.user_input_prompt)
 
         for run_number in range(1, args.runs + 1):
             output = call_openai_api(system_prompt, user_input, api_key, api_base)
