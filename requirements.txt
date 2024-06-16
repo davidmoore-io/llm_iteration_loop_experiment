@@ -1,2 +1,3 @@
 openai==1.34.0
-pyyaml==6.0
+pyyaml==6.0pip 
+tiktoken==0.7.0
