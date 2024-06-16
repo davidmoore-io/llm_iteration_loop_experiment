@@ -49,4 +49,5 @@ dmypy.json
 # End of sensible defaults
 input/default_system_prompt.txt
 input/user_input_prompt.txt
-input/default_system_prompt.txt
+output
+
